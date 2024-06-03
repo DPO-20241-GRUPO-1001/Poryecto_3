@@ -1,8 +1,10 @@
 package transacciones;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
+import central.Oferta;
 import inventario.ObraDeArte;
 import usuarios.Usuario;
 
@@ -19,10 +21,10 @@ public class Subasta extends Transaccion
 	private int comprador;
 	private ObraDeArte pieza;
 	private int valor_minimo;
+	private Oferta ofertaIndividual;
 	private HashMap<Integer, Usuario> Empleados;
 	private HashMap<Integer, Usuario> Clientes;
-	private HashMap<Integer, ObraDeArte> solicitudCompra;
-	private HashMap<Integer, ObraDeArte> solicitudSubasta;
+	private ArrayList<Oferta> solicitudesSubasta;
 	
 		
 	//constructor
@@ -34,8 +36,7 @@ public class Subasta extends Transaccion
 		this.valor_minimo = valor_minimo;
 		this.Empleados = new HashMap<Integer, Usuario>( );
 		this.Clientes = new HashMap<Integer, Usuario>( );
-		this.solicitudCompra = new HashMap<Integer, ObraDeArte>( );
-		this.solicitudSubasta = new HashMap<Integer, ObraDeArte>( );
+		this.solicitudesSubasta = new ArrayList<Oferta>( );
 	}
 
 	//metodos
@@ -76,12 +77,14 @@ public class Subasta extends Transaccion
 		return valor_minimo;
 	}
 
-
 	public void setValor_minimo(int valor_minimo) {
 		this.valor_minimo = valor_minimo;
 	}
 
-
+	public Oferta getOfertaIndividual() {
+		return ofertaIndividual;
+	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -97,10 +100,16 @@ public class Subasta extends Transaccion
 	}
 
 
-	public void setComprador(int comprador) {
-		this.comprador = comprador;
+	public void setComprador() {
+		for (Oferta ofertaIndividual : solicitudesSubasta) {
+			if (ofertaIndividual.getValor() > getValor_minimo());
+			this.comprador = ofertaIndividual.getOfertante();
+		}
 	}
-
+	
+	public int getComprador() {
+		return comprador;
+	}
 
 	public void setEmpleados(HashMap<Integer, Usuario> empleados) {
 		Empleados = empleados;
@@ -111,14 +120,8 @@ public class Subasta extends Transaccion
 		Clientes = clientes;
 	}
 
-
-	public void setSolicitudCompra(HashMap<Integer, ObraDeArte> solicitudCompra) {
-		this.solicitudCompra = solicitudCompra;
-	}
-
-
-	public void setSolicitudSubasta(HashMap<Integer, ObraDeArte> solicitudSubasta) {
-		this.solicitudSubasta = solicitudSubasta;
+	public void setSolicitudSubasta(ArrayList<Oferta> solicitudesSubasta) {
+		this.solicitudesSubasta = solicitudesSubasta;
 	}
 	
 	public ObraDeArte getPieza() {
@@ -127,14 +130,19 @@ public class Subasta extends Transaccion
 	
 	public boolean  verificarOferta(Subasta subasta, int oferta) {
 		 return subasta.getPieza().getValor_inicial()<oferta && oferta>subasta.getValor_minimo();
-	 }
+	}
 	
-	public boolean verificarEstadoPieza(String estadoSolicitud) {
-    	for (ObraDeArte pieza : solicitudSubasta.values()) {
-    		if (pieza.getEstado().equals(estadoSolicitud)) {
+	public boolean verificarEstadoPieza() {
+    		if (pieza.getEstado().equals("en subasta")) {
     			return true;
     		}
-    	}
     	return false;
     }
+	
+	public ArrayList<Oferta> agregarSolicitudesSubasta(Oferta ofertaIndividual){
+		solicitudesSubasta.add(ofertaIndividual);
+		return solicitudesSubasta;
+	}
+	
 }
+

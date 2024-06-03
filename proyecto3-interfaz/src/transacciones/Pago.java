@@ -1,12 +1,14 @@
 package transacciones;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import inventario.ObraDeArte;
 
 @SuppressWarnings("unused")
 public class Pago implements Serializable
 {
-	
 	/**
 	 * 
 	 */
@@ -15,7 +17,7 @@ public class Pago implements Serializable
 	private double valor;
 	private int identificacion_cliente;
 	private int codigoRegistro;
-	private HashMap<Integer, TarjetaCredito> tarjetas;
+	private ArrayList<Pago> pagosEfectivo;
 	
 	public Pago(String tipoPago, double valor, int identificacion_cliente, int codigoRegistro) {
 		super();
@@ -23,8 +25,7 @@ public class Pago implements Serializable
 		this.valor = valor;
 		this.identificacion_cliente = identificacion_cliente;
 		this.codigoRegistro = codigoRegistro;
-		this.tarjetas = new HashMap<Integer, TarjetaCredito>();
-		
+		this.pagosEfectivo = new ArrayList<Pago>();
 	}
 	public String getTipoPago() {
 		return tipoPago;
@@ -37,5 +38,10 @@ public class Pago implements Serializable
 		return valor;
 	}
 	
+	public ArrayList<Pago> agregarPagoListaPagosEfectivo () {
+		Pago nuevoPago  = new Pago(tipoPago, valor, identificacion_cliente, codigoRegistro);
+		pagosEfectivo.add(nuevoPago);
+		return pagosEfectivo;
+	}
 	
 }

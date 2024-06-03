@@ -63,7 +63,7 @@ class Galeria1Test {
 		galeria.IngresarVideoConsignacion(fecha, "Silliness",1988,"Francia",autor,true,"en venta", 30000,false,55903,fecha,
 				"Juan Reyes","Enrique Segoviano",reparto,"Frances",1205);
 		
-		Compra compra = new Compra(fecha, 54952);
+		Compra compra = new Compra(fecha, 54952, "efectivo");
 				
 		galeria.registrarCliente("Luis Rodriguez",54952,31429257,"luis26@gmail.com","le.rodriguez","hollow278",3500,7000	);
 		

@@ -36,7 +36,7 @@ class CompraTest {
 	    
 		pieza = new Video(001,"Video","Silliness",1988,"Francia",autor,true,"en venta", 30000,false,55903,fecha,fecha,"Juan Reyes","Enrique Segoviano",reparto,"Frances",1205); 
 
-		compra = new Compra(fecha,54952);
+		compra = new Compra(fecha,54952, "efectivo");
 		
 		galeria = new Galeria();
 		

@@ -2,6 +2,9 @@ package central;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
+
+import inventario.ObraDeArte;
 
 public class Oferta implements Serializable 
 {
@@ -13,6 +16,7 @@ public class Oferta implements Serializable
 	private int ofertante; //identificación del cliente que crea la oferta
 	private float valor;
 	private String tipoDePago; 
+	private HashMap<Integer, ObraDeArte> piezas;
 	
 	//constructor
 	public Oferta (int codigoRegistro, Date fechaSolicitud, int ofertante, float valor, String tipoDePago) {
@@ -43,5 +47,7 @@ public class Oferta implements Serializable
 	public int getCodigoRegistro() {
 		return codigoRegistro;
 	}
+	
+	
 	
 }

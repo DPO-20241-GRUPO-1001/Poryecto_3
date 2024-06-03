@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import central.Galeria;
 import inventario.ObraDeArte;
+import transacciones.TarjetaCredito;
 
 @SuppressWarnings("unused")
 public class Cliente extends Usuario
@@ -24,6 +25,7 @@ public class Cliente extends Usuario
 	//atributos
 	private double ingreso;
 	private double limiteCompra;
+	private TarjetaCredito tarjetaCredito;
 	private HashMap<Integer, ObraDeArte> historialPropiedad;
 	private HashMap<Integer, ObraDeArte> historialCompra;
 	
@@ -63,6 +65,15 @@ public class Cliente extends Usuario
 
 	public HashMap<Integer, ObraDeArte> consultarHistorialCompra() {
 		return historialCompra;
+	}
+
+	public TarjetaCredito getTarjetaCredito() {
+		return tarjetaCredito;
+	}
+
+
+	public void setTarjetaCredito(TarjetaCredito tarjetaCredito) {
+		this.tarjetaCredito = tarjetaCredito;
 	}
 
 

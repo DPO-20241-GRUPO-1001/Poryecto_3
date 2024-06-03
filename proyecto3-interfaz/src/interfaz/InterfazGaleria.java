@@ -18,7 +18,7 @@ public class InterfazGaleria extends javax.swing.JFrame {
 
         jLabel1.setText("BIENVENIDO A LA GALERIA DE ARTE");
 
-        jButton1.setText("Ingrersar");
+        jButton1.setText("Ingresar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

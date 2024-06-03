@@ -19,6 +19,7 @@ public class Compra extends Transaccion
 
 	private Date fechaAprobacion;
 	private int comprador;
+	private String tipoPago;
 	private HashMap<Integer, Usuario> Empleados;
 	private HashMap<Integer, Usuario> Clientes;
 	private HashMap<Integer, ObraDeArte> solicitudCompra;
@@ -26,11 +27,12 @@ public class Compra extends Transaccion
 		
 	
 	//constructor
-	public Compra(Date fechaAprobacion, int comprador) 
+	public Compra(Date fechaAprobacion, int comprador, String tipoDePago) 
 	{
 		super(fechaAprobacion);
 		// TODO Auto-generated constructor stub
 		this.comprador = comprador;
+		this.tipoPago = tipoDePago;
 		this.Empleados = new HashMap<Integer, Usuario>( );
 		this.Clientes = new HashMap<Integer, Usuario>( );
 		this.solicitudCompra = new HashMap<Integer, ObraDeArte>( );
@@ -68,7 +70,11 @@ public class Compra extends Transaccion
 	public int getComprador() {
 		return comprador;
 	}
-
+	
+	public String getTipoPago() {
+		return tipoPago;
+	}
+	
 
 	public boolean verificarCompra() {
 	    double totalCompra = 0.0;
@@ -110,4 +116,12 @@ public class Compra extends Transaccion
     	}
     	return false;
     }
+    
+    public double valorCompra () {
+		double valorCompra = 0;
+		for (ObraDeArte pieza : solicitudCompra.values()) {
+			valorCompra += pieza.getValor();
+		}
+		return valorCompra;
+	}
 }

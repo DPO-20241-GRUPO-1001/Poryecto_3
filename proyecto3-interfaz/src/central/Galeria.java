@@ -36,7 +36,7 @@ public class Galeria implements Serializable
 	private HashMap<Integer,Cliente> clientesMap;
 	private HashMap<Integer,Empleado> empleadosMap;
 	private ArrayList<Artista> artistas;
-	private ArrayList<Pago> pagosTransferencia;
+	private ArrayList<Pago> pagosTarjetaCredito;
 	private ArrayList<Pago> pagosEfectivo;
 	
 	
@@ -49,7 +49,7 @@ public class Galeria implements Serializable
 		this.artistas = new ArrayList<Artista>();
 		this.clientesMap = new HashMap<Integer,Cliente>();
 		this.empleadosMap = new HashMap<Integer,Empleado>();
-		this.pagosTransferencia = new ArrayList<Pago>();
+		this.pagosTarjetaCredito = new ArrayList<Pago>();
 		this.pagosEfectivo = new ArrayList<Pago>();	
 	}
 	
@@ -73,7 +73,7 @@ public class Galeria implements Serializable
 	}
 
 	public ArrayList<Pago> consultarHistorialPagosTranferencia() {
-		return pagosTransferencia;
+		return pagosTarjetaCredito;
 	}
 	
 	public ArrayList<Pago> consultarHistorialPagosEfectivo() {
@@ -443,7 +443,7 @@ public class Galeria implements Serializable
 
 	    for (String codigo : codigos) {
 	        ObraDeArte pieza = mapaPiezas.get(Integer.parseInt(codigo));
-	        Compra compra = new Compra(fecha,identificacion);
+	        Compra compra = new Compra(fecha,identificacion, tipoPago);
 	        String estado_inicial = pieza.getEstado();
 
 	        if (compra.verificarEstadoPieza(estadoSolicitud)) {
@@ -487,7 +487,7 @@ public class Galeria implements Serializable
 	        ObraDeArte pieza = piezas.get(Integer.parseInt(codigo));
 	        Subasta subasta = new Subasta(fecha, identificacion,pieza,valor_minimo);
 
-	        if (subasta.verificarEstadoPieza(estadoSolicitud)) {
+	        if (subasta.verificarEstadoPieza()) {
 	            Cliente clienteBuscado = clientes.get(identificacion);
 	            String login = clienteBuscado.getLogin();
 	            String password = clienteBuscado.getPassword();

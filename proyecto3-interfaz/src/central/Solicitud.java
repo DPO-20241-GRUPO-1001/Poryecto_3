@@ -56,12 +56,5 @@ public class Solicitud
 	    return solicitudPiezas;
 	}
 	
-	public float valorCompra () {
-		float valorCompra = 0;
-		for (ObraDeArte pieza : solicitudPiezas.values()) {
-			valorCompra += pieza.getValor();
-		}
-		return valorCompra;
-	}
 	
 }

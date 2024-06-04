@@ -1,6 +1,9 @@
 package interfaz;
 
 import javax.swing.*;
+
+import central.Galeria;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,10 +12,13 @@ import java.awt.event.ActionListener;
 public class VentanaCliente extends JFrame {
     private JPanel mainPanel;
     private JPanel buttonPanel;
-
-    public VentanaCliente() 
+    private static Galeria mundoGaleria;
+    
+    public VentanaCliente(Galeria munGaleria) 
     {
-        setTitle("Ventana Cliente");
+    	mundoGaleria = munGaleria;
+    	
+    	setTitle("Ventana Cliente");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -86,7 +92,7 @@ public class VentanaCliente extends JFrame {
                 	PanelPiezasSubastadas.updatePanel(mainPanel);
                     break;
                 case 5:
-                	PanelRegistrarUsuarios.updatePanel(mainPanel);
+                	PanelRegistrarUsuarios.updatePanel(mainPanel, mundoGaleria);
                     break;    
                 default:
                     break;
@@ -99,7 +105,7 @@ public class VentanaCliente extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new VentanaCliente().setVisible(true);
+                new VentanaCliente(mundoGaleria).setVisible(true);
             }
         });
     }

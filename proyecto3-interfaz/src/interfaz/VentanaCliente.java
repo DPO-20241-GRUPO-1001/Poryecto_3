@@ -1,24 +1,18 @@
 package interfaz;
 
 import javax.swing.*;
-
-import central.Galeria;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 @SuppressWarnings("serial")
-public class VentanaAdmin extends JFrame {
-	private static Galeria mundoGaleria;
+public class VentanaCliente extends JFrame {
     private JPanel mainPanel;
-    private JPanel btnPanel;
+    private JPanel buttonPanel;
 
-    public VentanaAdmin(Galeria munGaleria) {
-    	
-    	mundoGaleria = munGaleria;
-    	
-        setTitle("Ventana Administrador");
+    public VentanaCliente() 
+    {
+        setTitle("Ventana Cliente");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -28,16 +22,16 @@ public class VentanaAdmin extends JFrame {
         add(mainPanel, BorderLayout.CENTER);
 
         
-        btnPanel = new JPanel();
-        btnPanel.setLayout(new BorderLayout());
+        buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BorderLayout());
 
         JLabel titleLabel = new JLabel("MENU", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        btnPanel.add(titleLabel, BorderLayout.NORTH);
+        buttonPanel.add(titleLabel, BorderLayout.NORTH);
         
         JPanel gridPanel = new JPanel();
-        gridPanel.setLayout(new GridLayout(7, 1)); 
-        btnPanel.add(gridPanel, BorderLayout.CENTER);;
+        gridPanel.setLayout(new GridLayout(5, 1)); 
+        buttonPanel.add(gridPanel, BorderLayout.CENTER);;
         
         
         JButton button1 = new JButton("Consultar Historial Pieza");
@@ -50,45 +44,35 @@ public class VentanaAdmin extends JFrame {
         button2.addActionListener(new ButtonClickListener(2));
         gridPanel.add(button2);
         
-        JButton button3 = new JButton("Consultar Pieza");
+        JButton button3 = new JButton("Consultar Historial Propiedad");
         button3.setPreferredSize(new Dimension(200, 100));
         button3.addActionListener(new ButtonClickListener(3));
         gridPanel.add(button3);
         
-        JButton button4 = new JButton("Consultar Piezas en Subasta");
+        JButton button4 = new JButton("Consultar Pieza");
         button4.setPreferredSize(new Dimension(200, 100));
         button4.addActionListener(new ButtonClickListener(4));
         gridPanel.add(button4);
         
-        JButton button5 = new JButton("Registrar Usuario");
+        JButton button5 = new JButton("Consultar Ofertar Pieza");
         button5.setPreferredSize(new Dimension(200, 100));
         button5.addActionListener(new ButtonClickListener(5));
         gridPanel.add(button5);
-        
-        JButton button6 = new JButton("Aprobar Ofertas");
-        button6.setPreferredSize(new Dimension(200, 100));
-        button6.addActionListener(new ButtonClickListener(6));
-        gridPanel.add(button6);
+                
 
-        JButton button7 = new JButton("Registrar Pieza");
-        button7.setPreferredSize(new Dimension(200, 100));
-        button7.addActionListener(new ButtonClickListener(7));
-        gridPanel.add(button7);
-        
-
-        add(btnPanel, BorderLayout.WEST);
+        add(buttonPanel, BorderLayout.WEST);
     }
     
     private class ButtonClickListener implements ActionListener {
-        private int indexBtn;
+        private int buttonIndex;
 
         public ButtonClickListener(int buttonIndex) {
-            this.indexBtn = buttonIndex;
+            this.buttonIndex = buttonIndex;
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            switch (indexBtn) {
+            switch (buttonIndex) {
                 case 1:
                     PanelHistorialPieza.updatePanel(mainPanel);
                     break;
@@ -102,13 +86,7 @@ public class VentanaAdmin extends JFrame {
                 	PanelPiezasSubastadas.updatePanel(mainPanel);
                     break;
                 case 5:
-                	PanelRegistrarUsuarios.updatePanel(mainPanel, mundoGaleria);
-                    break;
-                case 6:
-                	PanelAprobarOfertas.updatePanel(mainPanel);
-                    break;
-                case 7:
-                	PanelRegistrarPieza.updatePanel(mainPanel);
+                	PanelRegistrarUsuarios.updatePanel(mainPanel);
                     break;    
                 default:
                     break;
@@ -121,7 +99,7 @@ public class VentanaAdmin extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new VentanaAdmin(mundoGaleria).setVisible(true);
+                new VentanaCliente().setVisible(true);
             }
         });
     }

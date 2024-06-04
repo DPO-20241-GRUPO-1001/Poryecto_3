@@ -65,7 +65,7 @@ public abstract class PasarelaPago
 		return true;
 	}
 	
-	public boolean verifica2rReportada(int numTarjeta)
+	public boolean verificarReportada(int numTarjeta)
 	{
 		TarjetaCredito tarjeta = comprador.getTarjetaCredito();
 		if (!tarjeta.isReportada()) {

@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.UIManager;
 
+import central.Galeria;
+
 @SuppressWarnings("serial")
 public class Menu1 extends JFrame {
 
@@ -25,8 +27,9 @@ public class Menu1 extends JFrame {
     private JTextField fieldUsuario;
     private JTextField fieldContrasenia;
     
-    
-    public Menu1() {
+    private static Galeria mundoGaleria;
+    public Menu1(Galeria munGaleria) {
+    	mundoGaleria = munGaleria;
         initComponents();
     }
 
@@ -147,7 +150,7 @@ public class Menu1 extends JFrame {
     private void jButton1ActionPerformed(ActionEvent e) {                                         
     	if (e.getSource()==btnIngreso) {
 			dispose();
-			VentanaAdmin Ventana = new VentanaAdmin();
+			VentanaAdmin Ventana = new VentanaAdmin(mundoGaleria);
 			Ventana.setVisible(true);
 		}
     }                                        
@@ -171,7 +174,7 @@ public class Menu1 extends JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Menu1().setVisible(true);
+                new Menu1(mundoGaleria).setVisible(true);
             }
         });
     }                 

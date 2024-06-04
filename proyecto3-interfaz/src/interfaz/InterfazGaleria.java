@@ -1,23 +1,33 @@
 package interfaz;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import central.Galeria;
+
 @SuppressWarnings("serial")
 public class InterfazGaleria extends JFrame {
 
+	private Galeria mundoGaleria;
+	private static String clasePasarela;
+	private static String archivoDatos;
+	
 	private JButton btnIngreso;
     private JLabel labelBienv;
 
-    public InterfazGaleria() {
+    public InterfazGaleria(String clasePasarela, String archivoDatos) {
+    	mundoGaleria = new Galeria(clasePasarela, archivoDatos);
         initComponents();
     }
                      
     private void initComponents() {
 
-        labelBienv = new javax.swing.JLabel();
+        labelBienv = new JLabel();
         btnIngreso = new JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -25,7 +35,7 @@ public class InterfazGaleria extends JFrame {
         labelBienv.setText("BIENVENIDO A LA GALERIA DE ARTE");
 
         btnIngreso.setText("Ingresar");
-        btnIngreso.addActionListener(new java.awt.event.ActionListener() {
+        btnIngreso.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
@@ -57,9 +67,9 @@ public class InterfazGaleria extends JFrame {
         pack();
     }                   
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton1ActionPerformed(ActionEvent evt) {                                         
     	dispose();
-		Menu1 ingreso = new Menu1();
+		Menu1 ingreso = new Menu1(mundoGaleria);
 		ingreso.setVisible(true);
     }                                        
 
@@ -84,7 +94,7 @@ public class InterfazGaleria extends JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InterfazGaleria().setVisible(true);
+                new InterfazGaleria(clasePasarela, archivoDatos).setVisible(true);
             }
         });
     }

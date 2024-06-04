@@ -7,13 +7,16 @@ import inventario.Grabado;
 import inventario.ObraDeArte;
 import inventario.Pintura;
 import inventario.Video;
+import pasarelas.PasarelaPago;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import transacciones.Compra;
 import transacciones.Pago;
 import transacciones.Subasta;
@@ -21,7 +24,6 @@ import inventario.Artista;
 import usuarios.Cliente;
 import usuarios.Empleado;
 import usuarios.Usuario;
-import java.time.LocalDate;
 
 public class Galeria implements Serializable
 {
@@ -38,10 +40,11 @@ public class Galeria implements Serializable
 	private ArrayList<Artista> artistas;
 	private ArrayList<Pago> pagosTarjetaCredito;
 	private ArrayList<Pago> pagosEfectivo;
+	private PasarelaPago pasarela;
 	
 	
 	//constructor
-	public Galeria()
+	public Galeria(String clasePasarela, String archivoDatos)
 	{
 		this.piezas = new HashMap<Integer, ObraDeArte>(); 
 		this.empleados = new ArrayList<Empleado>();
@@ -51,10 +54,52 @@ public class Galeria implements Serializable
 		this.empleadosMap = new HashMap<Integer,Empleado>();
 		this.pagosTarjetaCredito = new ArrayList<Pago>();
 		this.pagosEfectivo = new ArrayList<Pago>();	
+		
+		try
+		{
+		
+		Class<?> clase = Class.forName(clasePasarela);
+        pasarela = (PasarelaPago) clase.getDeclaredConstructor().newInstance((Object[]) null);
+        pasarela.cargarPagos(archivoDatos);
+		}
+		catch (ClassNotFoundException e)
+		{
+		System.out.println("No existe la clase " + clasePasarela);
+		}
+		catch (Exception e)
+		{
+		System.out.println("Hubo otro error construyendo la pasarela de pago: " + e.getMessage());
+		e.printStackTrace();
+		}
+	}
+	
+	//métodos
+	
+	public void listarPagos() {
+	    pasarela.getPagosTarjetaCredito().forEach(pago -> {
+	        System.out.println("Tipo de Pago: " + pago.getTipoPago());
+	        System.out.println("Valor: " + pago.getValor());
+	        System.out.println("ID del Comprador: " + pago.getIdentificacion_cliente());
+	        System.out.println("Código de Registro: " + pago.getCodigoRegistro());
+	        System.out.println("-----------------------");
+	    });
+	}
+	
+	public static void main(String[] args) throws IOException
+	{
+	System.out.println("Indique el nombre de la clase para la agenda telefónica del celular.");
+	System.out.println("Si no teclea nada, será 'galeria.PasarelaPagoCSV'");
+	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	String nombreClase = reader.readLine();
+	if (nombreClase.length() == 0) // El usuario no tecleó nada
+	nombreClase = "celular.AgendaCSV";
+
+	Galeria laGaleria = new Galeria(nombreClase, "./data/datos.csv");
+	
+	laGaleria.listarPagos();
 	}
 	
 	
-	//métodos
 	public ArrayList<Empleado> consultarEmpleados() {
 		return empleados;
 	}

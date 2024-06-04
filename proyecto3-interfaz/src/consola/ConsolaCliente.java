@@ -15,6 +15,13 @@ public class ConsolaCliente extends ConsolaBasica
 	
 		 private final String[] opcionesMenuPrincipal = new String[] {"Realizar oferta de compra", "Realizar oferta de subasta","Consultar historial de propiedades actuales", "Consultar historial de compras",  "Salir"};
 		 
+		 
+		 private Galeria galeria;
+		 
+		 public ConsolaCliente(String clasePasarela, String archivoDatos) {
+		        this.galeria = new Galeria(clasePasarela, archivoDatos);
+		    }
+		 
 		 //Métodos
 		 
 		 public void mostrarMenuPrincipal() 
@@ -53,8 +60,7 @@ public class ConsolaCliente extends ConsolaBasica
 
 		public void comprarPiezas() 
 		 {
-			 Galeria galeria = new Galeria();
-			 
+			
 			 String codigosRegistro = pedirCadenaAlUsuario("Ingrese los códigos de registro de las piezas a comprar separados por coma y espacio: ");
 		     int identificacion = pedirEnteroAlUsuario("Ingrese la identificación del cliente: ");
 		     Date fecha = new Date(); // Obtener la fecha actual
@@ -70,7 +76,6 @@ public class ConsolaCliente extends ConsolaBasica
 		 
 		 public void ofertarPiezas() 
 		 {
-			 Galeria galeria = new Galeria();
 			 
 			 String codigosRegistro = pedirCadenaAlUsuario("Ingrese los códigos de registro de las piezas a ofertar separados por coma y espacio: ");
 		     int oferta = pedirEnteroAlUsuario("Ingrese la oferta por las piezas: ");
@@ -90,7 +95,6 @@ public class ConsolaCliente extends ConsolaBasica
 		 
 		 public void consultarHistorialPropiedades() 
 		 {
-			 Galeria galeria = new Galeria();
 			 
 			 int identificacionCliente = pedirEnteroAlUsuario("Ingrese la identificación del cliente: ");
 			 Cliente cliente = galeria.buscarClientePorIdentificacion(identificacionCliente);
@@ -105,7 +109,6 @@ public class ConsolaCliente extends ConsolaBasica
 		 
 		 public void consultarHistorialCompras() 
 		 {
-			 Galeria galeria = new Galeria();
 			 
 			 int identificacionCliente = pedirEnteroAlUsuario("Ingrese la identificación del cliente: ");
 			 Cliente cliente = galeria.buscarClientePorIdentificacion(identificacionCliente);

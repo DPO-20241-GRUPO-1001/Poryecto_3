@@ -3,7 +3,7 @@ package interfaz;
 import javax.swing.*;
 import java.awt.*;
 
-public class panelHistorialCompra {
+public class PanelHistorialCompra {
 
     public static void updatePanel(JPanel panel) {
         panel.removeAll();

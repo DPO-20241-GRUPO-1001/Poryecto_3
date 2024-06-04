@@ -9,12 +9,17 @@ public class ConsolaPrincipal extends ConsolaBasica
 	//Atributos
 	
 	private final String[] opcionesMenuPrincipal = new String[] {"Registrar nuevo empleado", "Registrar nuevo cliente", "Acceder al sistema de la galería", "Salir"};
+	
+	private Galeria galeria;
 	 
+	 public ConsolaPrincipal(String clasePasarela, String archivoDatos) {
+	        this.galeria = new Galeria(clasePasarela, archivoDatos);
+	    }
 	 
 	 //Métodos
 	 
 	    
-	 public void mostrarMenuPrincipal() 
+	 public void mostrarMenuPrincipal(String clasePasarela, String archivoDatos) 
 	 {
 	     
 		 int opcion = mostrarMenu("Bienvenido al Menú Principal", opcionesMenuPrincipal);
@@ -30,7 +35,7 @@ public class ConsolaPrincipal extends ConsolaBasica
 	     
 	     else if(opcion == 3) 
 	     {
-	    	 accederSistema();
+	    	 accederSistema(clasePasarela, archivoDatos);
 	     }
 	     
 	     else if(opcion == 4)
@@ -39,13 +44,12 @@ public class ConsolaPrincipal extends ConsolaBasica
 	    	 System.exit(0);
 	     }
 	     
-	     mostrarMenuPrincipal();
+	     mostrarMenuPrincipal(clasePasarela, archivoDatos);
 	 }
 	 
 	 
 	 public void registrarEmpleado() 
 	 {
-		 Galeria galeria = new Galeria();
 		 
 		 String nombre = pedirCadenaAlUsuario("Indique su nombre completo: ");
 		 int identificacion = pedirEnteroAlUsuario("Indique su número de identificación sin carácteres especiales o espacios: ");
@@ -62,8 +66,6 @@ public class ConsolaPrincipal extends ConsolaBasica
 	 
 	 public void registrarCliente() 
 	 {
-		 Galeria galeria = new Galeria();
-		 
 		 String nombre = pedirCadenaAlUsuario("Indique su nombre completo: ");
 		 int identificacion = pedirEnteroAlUsuario("Indique su número de identificación sin carácteres especiales o espacios: ");
 		 int telefono = pedirEnteroAlUsuario("Indique su número de telefono sin carácteres especiales o espacios: ");
@@ -78,22 +80,18 @@ public class ConsolaPrincipal extends ConsolaBasica
 		 System.out.println("El cliente se registró correctamente.");
 	 }
 	 
-	 public void accederSistema()
+	 public void accederSistema(String clasePasarela, String archivoDatos)
 	 {
-		 Galeria galeria = new Galeria();
 	 
 		 String login = pedirCadenaAlUsuario("Indique su nombre de usuario con el que ingresará al sistema de la galería: ");
 		 String password = pedirCadenaAlUsuario("Indique una contraseña con la que ingresará al sistema de la galería, esta debe ser de mínimo 5 dígitos: ");
-
-		 boolean sistema = galeria.accederSistema(login, password);
-		 
 		 
 		 String tipoUsuario = galeria.verificarUsuario(login, password);
 		 
 		 if (tipoUsuario != null) {
 		        switch (tipoUsuario) {
 		            case "cliente":
-		            	ConsolaCliente consolaCliente = new ConsolaCliente();
+		            	ConsolaCliente consolaCliente = new ConsolaCliente(clasePasarela, archivoDatos);
 		                consolaCliente.mostrarMenuPrincipal();
 		                break;
 		                
@@ -115,20 +113,20 @@ public class ConsolaPrincipal extends ConsolaBasica
 
 		                if (empleadoEncontrado.getTipo().equals("Administrador")) {
 		                        
-		                        ConsolaAdministrador consolaAdministrador = new ConsolaAdministrador();
+		                        ConsolaAdministrador consolaAdministrador = new ConsolaAdministrador(clasePasarela, archivoDatos);
 				                consolaAdministrador.mostrarMenuPrincipal();
 		                }
 
 		                if (empleadoEncontrado.getTipo().equals("Operador")) {
 		                        
-		                        ConsolaOperador consolaOperador = new ConsolaOperador();
+		                        ConsolaOperador consolaOperador = new ConsolaOperador(clasePasarela, archivoDatos);
 				                consolaOperador.mostrarMenuPrincipal();
 				                
 		                }
 
 		                if (empleadoEncontrado.getTipo().equals("Cajero")) {
 		                        
-		                        ConsolaCajero consolaCajero = new ConsolaCajero();
+		                        ConsolaCajero consolaCajero = new ConsolaCajero(clasePasarela, archivoDatos);
 				                consolaCajero.mostrarMenuPrincipal();
 		                }
 		                    

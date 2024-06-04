@@ -3,7 +3,7 @@ package interfaz;
 import javax.swing.*;
 import java.awt.*;
 
-public class panelVerificarOfertas {
+public class PanelAprobarOfertas {
 
     public static void updatePanel(JPanel panel) {
         panel.removeAll();

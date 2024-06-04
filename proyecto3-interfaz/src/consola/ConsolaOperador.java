@@ -7,7 +7,13 @@ import usuarios.Empleado;
 public class ConsolaOperador extends ConsolaBasica
 {
 	private final String[] opcionesMenuPrincipal = new String[]{"Registrar nuevas ofertas de subasta", "Consultar el historial de un artista", "Consultar el historial de un comprador", "Salir"};
-
+	
+	private Galeria galeria;
+	 
+	 public ConsolaOperador(String clasePasarela, String archivoDatos) {
+	        this.galeria = new Galeria(clasePasarela, archivoDatos);
+	    }
+	 
     public void mostrarMenuPrincipal() {
         int opcion = mostrarMenu("Bienvenido a la Galería Operador", opcionesMenuPrincipal);
         if (opcion == 1) 
@@ -36,7 +42,6 @@ public class ConsolaOperador extends ConsolaBasica
 
     public void consultarHistorialDeUnaPieza() 
     {
-        Galeria galeria = new Galeria();
         int identificador = pedirEnteroAlUsuario("Ingrese su identificador de administrador: ");
         int codigoRegistro = pedirEnteroAlUsuario("Ingrese el código de registro de la pieza de la que desea ver el historial: ");
         Empleado empleado = galeria.obtenerAdministradorPorIdentificacion(identificador);
@@ -51,7 +56,6 @@ public class ConsolaOperador extends ConsolaBasica
 
     public void consultarHistorialDeUnArtista() 
     {
-        Galeria galeria = new Galeria();
         int identificador = pedirEnteroAlUsuario("Ingrese su identificador de administrador: ");
         Empleado empleado = galeria.obtenerAdministradorPorIdentificacion(identificador);
 

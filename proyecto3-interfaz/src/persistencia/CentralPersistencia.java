@@ -15,7 +15,7 @@ public class CentralPersistencia {
     public static final String FOLDER = "./Datos/";
     public static String FILENAME = "galeria";
 
-    public Galeria cargaGaleria(String archivo) throws FileNotFoundException, IOException, ClassNotFoundException {
+    public Galeria cargaGaleria(String archivo, String clasePasarela, String archivoDatos) throws FileNotFoundException, IOException, ClassNotFoundException {
         File arch = new File(archivo);
         if (arch.exists()) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arch))) {
@@ -23,7 +23,7 @@ public class CentralPersistencia {
                 return galeria;
             }
         } else {
-            return new Galeria();
+            return new Galeria(clasePasarela, archivoDatos);
         }
     }
 
@@ -38,8 +38,7 @@ public class CentralPersistencia {
         salvarGaleria(FOLDER + FILENAME, galeria);
     }
 
-    public Galeria cargarGaleria() throws ClassNotFoundException, IOException {
-        return cargaGaleria(FOLDER + FILENAME);
+    public Galeria cargarGaleria(String clasePasarela, String archivoDatos) throws ClassNotFoundException, IOException {
+        return cargaGaleria(FOLDER + FILENAME, clasePasarela, archivoDatos);
     }
-
 }

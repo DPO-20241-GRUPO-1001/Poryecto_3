@@ -16,6 +16,12 @@ public class ConsolaAdministrador extends ConsolaBasica
 	 private final String[] opcionesMenuPrincipal = new String[] {"Verificar cliente", "Verificar empleado", "Verificar compra", "Verificar oferta", "Ingresar pieza a consignación","Consultar el historial de una pieza", "Consultar el historial de pagos", "Consultar el historial de un artista", "Consultar el historial de un comprador",  "Salir"};
 	 private final String[] opcionesMenuIngresoObra = new String[] {"Ceramica", "Escultura", "Fotografía", "Grabado", "Pintura", "Video"};
 	 
+	 private Galeria galeria;
+	 
+	 public ConsolaAdministrador(String clasePasarela, String archivoDatos) {
+	        this.galeria = new Galeria(clasePasarela, archivoDatos);
+	    }
+	 
 	 //Métodos
 	 
 	 public void mostrarMenuPrincipal() 
@@ -79,7 +85,6 @@ public class ConsolaAdministrador extends ConsolaBasica
 	 
 	 public void verificarCliente()
 	 {
-		 Galeria galeria = new Galeria();
 
 		    String login = pedirCadenaAlUsuario("Ingrese su login: ");
 		    String password = pedirCadenaAlUsuario("Ingrese su password: ");
@@ -95,7 +100,6 @@ public class ConsolaAdministrador extends ConsolaBasica
 	 
 	 public void verificarEmpleado()
 	 {
-		 Galeria galeria = new Galeria();
 
 		    String login = pedirCadenaAlUsuario("Ingrese el login del empleado: ");
 		    String password = pedirCadenaAlUsuario("Ingrese el password del empleado: ");
@@ -172,7 +176,6 @@ public class ConsolaAdministrador extends ConsolaBasica
 	 
 	 public void ingresarCeramica() 
 	 {
-		 Galeria galeria = new Galeria();
 		 
 		 Date fechaIngreso = new Date(); // Obtener la fecha actual
 		 String titulo = pedirCadenaAlUsuario("Título:");
@@ -200,7 +203,6 @@ public class ConsolaAdministrador extends ConsolaBasica
 	 
 	 public void ingresarEscultura() 
 	 {
-		 Galeria galeria = new Galeria();
 		 
 		 Date fechaIngreso = new Date(); // Obtener la fecha actual
 		 String titulo = pedirCadenaAlUsuario("Título:");
@@ -228,7 +230,6 @@ public class ConsolaAdministrador extends ConsolaBasica
 	 
 	 public void ingresarFotografia() 
 	 {
-		 Galeria galeria = new Galeria();
 		 
 		 Date fechaIngreso = new Date(); // Obtener la fecha actual
 		 String titulo = pedirCadenaAlUsuario("Título:");
@@ -255,7 +256,6 @@ public class ConsolaAdministrador extends ConsolaBasica
 	 
 	 public void ingresarGrabado() 
 	 {
-		 Galeria galeria = new Galeria();
 		 
 		 Date fechaIngreso = new Date(); // Obtener la fecha actual
 		 String titulo = pedirCadenaAlUsuario("Título:");
@@ -285,7 +285,6 @@ public class ConsolaAdministrador extends ConsolaBasica
 	 
 	 public void ingresarPintura() 
 	 {
-		 Galeria galeria = new Galeria();
 		 
 		 Date fechaIngreso = new Date(); // Obtener la fecha actual
 		 String titulo = pedirCadenaAlUsuario("Título:");
@@ -314,7 +313,6 @@ public class ConsolaAdministrador extends ConsolaBasica
 	 
 	 public void ingresarVideo() 
 	 {
-		 Galeria galeria = new Galeria();
 		 
 		 Date fechaIngreso = new Date(); // Obtener la fecha actual
 		 String titulo = pedirCadenaAlUsuario("Título:");
@@ -345,7 +343,7 @@ public class ConsolaAdministrador extends ConsolaBasica
 	 
 	 public void consultarHistorialDeUnaPieza()
 	 {
-		 Galeria galeria = new Galeria(); 
+
 		 int identificador = pedirEnteroAlUsuario("Ingrese su identificador de administrador: ");
 		 int codigoRegistro = pedirEnteroAlUsuario("Ingrese el código de registro de la pieza de la que dese ver el historial:  ");
 		 Empleado empleado = galeria.obtenerAdministradorPorIdentificacion(identificador); 
@@ -358,7 +356,6 @@ public class ConsolaAdministrador extends ConsolaBasica
 	 
 	 public void consultarHistorialDePago()
 	 {
-		 Galeria galeria = new Galeria(); 
 		 int identificador = pedirEnteroAlUsuario("Ingrese su identificador de administrador: ");
 		 Empleado empleado = galeria.obtenerAdministradorPorIdentificacion(identificador);
 		 
@@ -371,8 +368,7 @@ public class ConsolaAdministrador extends ConsolaBasica
 	 
 	 
 	 public void consultarHistorialDeUnArtista()
-	 {
-		 Galeria galeria = new Galeria(); 
+	 { 
 		 int identificador = pedirEnteroAlUsuario("Ingrese su identificador de administrador: ");
 		 Empleado empleado = galeria.obtenerAdministradorPorIdentificacion(identificador);
 
@@ -391,7 +387,6 @@ public class ConsolaAdministrador extends ConsolaBasica
 	 
 	 public void consultarHistorialDeUnComprador()
 	 {
-		 Galeria galeria = new Galeria(); 
 		 int identificadorAdministrador = pedirEnteroAlUsuario("Ingrese su identificador de administrador: ");
 		 int identificadorCliente = pedirEnteroAlUsuario("Ingrese el identificador del cliente del que desea consultar el historial: ");
 		 Cliente cliente = galeria.buscarClientePorIdentificacion(identificadorCliente);

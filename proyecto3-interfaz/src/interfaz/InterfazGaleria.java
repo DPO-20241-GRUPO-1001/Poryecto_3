@@ -1,50 +1,56 @@
 package interfaz;
 
-public class InterfazGaleria extends javax.swing.JFrame {
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
+@SuppressWarnings("serial")
+public class InterfazGaleria extends JFrame {
+
+	private JButton btnIngreso;
+    private JLabel labelBienv;
 
     public InterfazGaleria() {
         initComponents();
     }
-
-    @SuppressWarnings("unchecked")
                      
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        labelBienv = new javax.swing.JLabel();
+        btnIngreso = new JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("BIENVENIDO A LA GALERIA DE ARTE");
+        labelBienv.setText("BIENVENIDO A LA GALERIA DE ARTE");
 
-        jButton1.setText("Ingresar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnIngreso.setText("Ingresar");
+        btnIngreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(164, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(labelBienv)
                 .addGap(162, 162, 162))
             .addGroup(layout.createSequentialGroup()
                 .addGap(220, 220, 220)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnIngreso, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(121, 121, 121)
-                .addComponent(jLabel1)
+                .addComponent(labelBienv)
                 .addGap(72, 72, 72)
-                .addComponent(jButton1)
+                .addComponent(btnIngreso)
                 .addContainerGap(167, Short.MAX_VALUE))
         );
 
@@ -53,7 +59,7 @@ public class InterfazGaleria extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
     	dispose();
-		menu1 ingreso = new menu1();
+		Menu1 ingreso = new Menu1();
 		ingreso.setVisible(true);
     }                                        
 
@@ -83,7 +89,5 @@ public class InterfazGaleria extends javax.swing.JFrame {
         });
     }
 
-                     
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;                 
+                                      
 }

@@ -5,11 +5,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ventanaAdmin extends JFrame {
+@SuppressWarnings("serial")
+public class VentanaAdmin extends JFrame {
     private JPanel mainPanel;
-    private JPanel buttonPanel;
+    private JPanel btnPanel;
 
-    public ventanaAdmin() {
+    public VentanaAdmin() {
         setTitle("Ventana Principal");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -20,16 +21,16 @@ public class ventanaAdmin extends JFrame {
         add(mainPanel, BorderLayout.CENTER);
 
         
-        buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BorderLayout());
+        btnPanel = new JPanel();
+        btnPanel.setLayout(new BorderLayout());
 
         JLabel titleLabel = new JLabel("MENU", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        buttonPanel.add(titleLabel, BorderLayout.NORTH);
+        btnPanel.add(titleLabel, BorderLayout.NORTH);
         
         JPanel gridPanel = new JPanel();
         gridPanel.setLayout(new GridLayout(7, 1)); 
-        buttonPanel.add(gridPanel, BorderLayout.CENTER);;
+        btnPanel.add(gridPanel, BorderLayout.CENTER);;
         
         
         JButton button1 = new JButton("Consultar Historial Pieza");
@@ -68,39 +69,39 @@ public class ventanaAdmin extends JFrame {
         gridPanel.add(button7);
         
 
-        add(buttonPanel, BorderLayout.WEST);
+        add(btnPanel, BorderLayout.WEST);
     }
     
     private class ButtonClickListener implements ActionListener {
-        private int buttonIndex;
+        private int indexBtn;
 
         public ButtonClickListener(int buttonIndex) {
-            this.buttonIndex = buttonIndex;
+            this.indexBtn = buttonIndex;
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            switch (buttonIndex) {
+            switch (indexBtn) {
                 case 1:
-                    panelHistorialPieza.updatePanel(mainPanel);
+                    PanelHistorialPieza.updatePanel(mainPanel);
                     break;
                 case 2:
-                	panelHistorialCompra.updatePanel(mainPanel);
+                	PanelHistorialCompra.updatePanel(mainPanel);
                     break;
                 case 3:
-                	panelConsultarPieza.updatePanel(mainPanel);
+                	PanelConsultarPieza.updatePanel(mainPanel);
                     break;
                 case 4:
-                	panelOfertaPieza.updatePanel(mainPanel);
+                	PanelPiezasSubastadas.updatePanel(mainPanel);
                     break;
                 case 5:
-                	panelRegistrarUsuarios.updatePanel(mainPanel);
+                	PanelRegistrarUsuarios.updatePanel(mainPanel);
                     break;
                 case 6:
-                	panelVerificarOfertas.updatePanel(mainPanel);
+                	PanelAprobarOfertas.updatePanel(mainPanel);
                     break;
                 case 7:
-                	panelHistorialPieza.updatePanel(mainPanel);
+                	PanelHistorialPieza.updatePanel(mainPanel);
                     break;    
                 default:
                     break;
@@ -113,7 +114,7 @@ public class ventanaAdmin extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new ventanaAdmin().setVisible(true);
+                new VentanaAdmin().setVisible(true);
             }
         });
     }

@@ -43,5 +43,19 @@ public class Pago implements Serializable
 		pagosEfectivo.add(nuevoPago);
 		return pagosEfectivo;
 	}
+	public int getIdentificacion_cliente() {
+		return identificacion_cliente;
+	}
+	public int getCodigoRegistro() {
+		return codigoRegistro;
+	}
+	public void setCodigoRegistro(int codigoRegistro) {
+		this.codigoRegistro = codigoRegistro;
+	}
+	public void setIdentificacion_cliente(int identificacion_cliente) {
+		this.identificacion_cliente = identificacion_cliente;
+	}
+	
+	
 	
 }

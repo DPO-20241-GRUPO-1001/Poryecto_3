@@ -1,7 +1,6 @@
 package pasarelas;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import inventario.ObraDeArte;
 import transacciones.Compra;
@@ -17,7 +16,7 @@ public abstract class PasarelaPago
 	private Pago pago;
 	private Compra compra;
 	private Subasta ofertaSubasta;
-	private ArrayList<Pago> pagosTarjetaCredito;
+	protected ArrayList<Pago> pagosTarjetaCredito;
 
 	
 	//constructor
@@ -29,7 +28,24 @@ public abstract class PasarelaPago
 		this.pagosTarjetaCredito = new ArrayList<Pago>();
 	}
 	
+	
+	
+	public ArrayList<Pago> getPagosTarjetaCredito() {
+		return pagosTarjetaCredito;
+	}
+
+
+
+	public void setPagosTarjetaCredito(ArrayList<Pago> pagosTarjetaCredito) {
+		this.pagosTarjetaCredito = pagosTarjetaCredito;
+	}
+
+
+
 	//métodos
+	public abstract void cargarPagos(String archivo);
+    public abstract void guardarPagos(String archivo);
+	
 	public boolean verificarTarjeta(int numTarjeta) {
 		TarjetaCredito tarjeta = comprador.getTarjetaCredito();
 		if (tarjeta.getNumeroTarjeta() == numTarjeta) {
@@ -49,7 +65,7 @@ public abstract class PasarelaPago
 		return true;
 	}
 	
-	public boolean verificarReportada(int numTarjeta)
+	public boolean verifica2rReportada(int numTarjeta)
 	{
 		TarjetaCredito tarjeta = comprador.getTarjetaCredito();
 		if (!tarjeta.isReportada()) {
@@ -74,7 +90,6 @@ public abstract class PasarelaPago
 		return nuevoPagoSubasta;
 		
 	}
-	
 	
 	public ArrayList<Pago> agregarPagoListaDeTarjeta () {
 		pagosTarjetaCredito.add(generarPagoSubasta());

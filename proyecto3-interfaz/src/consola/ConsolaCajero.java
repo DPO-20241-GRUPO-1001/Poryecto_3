@@ -9,6 +9,11 @@ public class ConsolaCajero extends ConsolaBasica
 {
 	private final String[] opcionesMenuPrincipal = new String[] {"Registrar pago","Consultar el historial de un artista", "Consultar el historial de un comprador",  "Salir"};
 	 
+	private Galeria galeria;
+	 
+	 public ConsolaCajero(String clasePasarela, String archivoDatos) {
+	        this.galeria = new Galeria(clasePasarela, archivoDatos);
+	    }
 	 //Métodos
 	 
 	 public void mostrarMenuPrincipal() 
@@ -42,7 +47,6 @@ public class ConsolaCajero extends ConsolaBasica
 	     
 	     public void registrarPago() 
 	     {
-	    	 Galeria galeria = new Galeria(); 
 			 int identificador = pedirEnteroAlUsuario("Ingrese su identificador de administrador: ");
 			 String tipoPago = ("Ingrese el tipo de pago: ");
 			 int identificadorCliente = pedirEnteroAlUsuario("Ingrese el identificador del cliente del que desea consultar el historial: ");
@@ -55,8 +59,7 @@ public class ConsolaCajero extends ConsolaBasica
 	     }
 	     
 	     public void consultarHistorialDeUnaPieza()
-	     {
-	    	 Galeria galeria = new Galeria(); 
+	     { 
 			 int identificador = pedirEnteroAlUsuario("Ingrese su identificador de administrador: ");
 			 int codigoRegistro = pedirEnteroAlUsuario("Ingrese el código de registro de la pieza de la que dese ver el historial:  ");
 			 Empleado empleado = galeria.obtenerAdministradorPorIdentificacion(identificador); 
@@ -67,7 +70,6 @@ public class ConsolaCajero extends ConsolaBasica
 	     
 	     public void consultarHistorialDeUnArtista()
 	     {
-	    	 Galeria galeria = new Galeria(); 
 			 int identificador = pedirEnteroAlUsuario("Ingrese su identificador de administrador: ");
 			 Empleado empleado = galeria.obtenerAdministradorPorIdentificacion(identificador);
 
